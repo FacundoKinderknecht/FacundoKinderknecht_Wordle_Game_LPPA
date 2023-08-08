@@ -140,7 +140,7 @@ function deleteLetter() {
 */
 function checkGuess() {
     let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let guessString = ""
+    let guessString = ''
     let rightGuess = Array.from(rightGuessString)
 
     for (const val of currentGuess) {
@@ -159,21 +159,21 @@ function checkGuess() {
 
 
     for (let i = 0; i < 5; i++) {
-        let letterColor = ""
+        let letterColor = ''
         let box = row.children[i]
         let letter = currentGuess[i]
 
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         // si la letra no esta en la palabra
         if (letterPosition === -1) {
-            letterColor = "grey"
+            letterColor = 'grey'
         } else {
             //si la letra esta en la palabra y en la psicion correcta
             if (currentGuess[i] === rightGuess[i]) {
-                letterColor = "green"
+                letterColor = 'green'
             } else {
                 //si la letra esta en la palabra pero no en la posicion correcta
-                letterColor = "yellow"
+                letterColor = 'yellow'
             }
             //cambia la letra en la variable para que no aparezca amarilla si la letra se repite
             rightGuess[letterPosition] = "#"
@@ -241,7 +241,7 @@ function checkGuess() {
             user: user,
             rightGuessString: rightGuessString,
             date: currentDate.toLocaleDateString(),
-            hour: currentDate.toLocaleDateString([], { hour: "2-digit", minute: "2-digit" }),
+            hour: currentDate.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' }),
             guessesMatrix: guessesMatrix,
             numberOfAttempts: numberOfAttempts,
             mins: mins,
@@ -265,16 +265,16 @@ function checkGuess() {
     */
     document.getElementById("keyboard-cont").addEventListener("click", (e) => {
         const target = e.target
-    
+
         if (!target.classList.contains("keyboard-button")) {
             return
         }
         let key = target.textContent
-    
+
         if (key === "Del") {
             key = "Backspace"
         }
-    
+
         document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
     })
 
@@ -290,11 +290,11 @@ function checkGuess() {
         for (const elem of document.getElementsByClassName("keyboard-button")) {
             if (elem.textContent === letter) {
                 let oldColor = elem.style.backgroundColor
-                if (oldColor === "green") {
+                if (oldColor === 'green') {
                     return
                 }
 
-                if (oldColor === "yellow" && color !== "green") {
+                if (oldColor === 'yellow' && color !== 'green') {
                     return
                 }
 
@@ -320,7 +320,7 @@ function saveGameState() {
         rightGuessString: rightGuessString,
         guessesMatrix: guessesMatrix,
         mins: mins,
-        secs: secs,
+        secs: secs
     }
     let saveStateString = JSON.stringify(file)
     localStorage.setItem(`saveGame${user}`, saveStateString)

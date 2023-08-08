@@ -140,7 +140,7 @@ function deleteLetter() {
 */
 function checkGuess() {
     let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let guessString = ""
+    let guessString = "
     let rightGuess = Array.from(rightGuessString)
 
     for (const val of currentGuess) {
@@ -159,7 +159,7 @@ function checkGuess() {
 
 
     for (let i = 0; i < 5; i++) {
-        let letterColor = ""
+        let letterColor = "
         let box = row.children[i]
         let letter = currentGuess[i]
 
@@ -265,17 +265,17 @@ function checkGuess() {
     */
     document.getElementById("keyboard-cont").addEventListener("click", (e) => {
         const target = e.target
-    
+
         if (!target.classList.contains("keyboard-button")) {
             return
         }
         let key = target.textContent
-    
+
         if (key === "Del") {
             key = "Backspace"
         }
-    
-        document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
+
+        document.dispatchEvent(new KeyboardEvent("keyup", { "key": key }))
     })
 
 

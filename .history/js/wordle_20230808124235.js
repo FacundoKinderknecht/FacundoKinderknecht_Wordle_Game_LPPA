@@ -5,15 +5,15 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-let user = sessionStorage.user
+var user = sessionStorage.user
 const alertContainer = document.querySelector("[data-alert-container]")
-let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
+var rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 const NUMBER_OF_GUESSES = 6
-let guessesRemaining = NUMBER_OF_GUESSES
-let numberOfAttempts
-let currentGuess = []
-let nextLetter = 0
-let guessesMatrix = [
+var guessesRemaining = NUMBER_OF_GUESSES
+var numberOfAttempts
+var currentGuess = []
+var nextvarter = 0
+var guessesMatrix = [
     ["", "", "", "", ""],
     ["", "", "", "", ""],
     ["", "", "", "", ""],
@@ -32,16 +32,16 @@ window.onload = () => {
 
     if (sessionStorage.getItem("isNew") === "false") {
         var loadFile = JSON.parse(localStorage.getItem(`saveGame${user}`))
-        let savedGuessesRemaining = loadFile.guessesRemaining
+        var savedGuessesRemaining = loadFile.guessesRemaining
         rightGuessString = loadFile.rightGuessString
         guessesMatrix = loadFile.guessesMatrix
         mins = loadFile.mins
         secs = loadFile.secs
         startTimer(mins, secs)
 
-        for (let row = 0; row < 6 - savedGuessesRemaining; row++) {
-            for (let box = 0; box < 5; box++) {
-                insertLetter(guessesMatrix[row][box])
+        for (var row = 0; row < 6 - savedGuessesRemaining; row++) {
+            for (var box = 0; box < 5; box++) {
+                insertvarter(guessesMatrix[row][box])
             }
             checkGuess()
         }
@@ -84,9 +84,9 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    let pressedKey = String(e.key)
-    if (pressedKey === "Backspace" && nextLetter !== 0) {
-        deleteLetter()
+    var pressedKey = String(e.key)
+    if (pressedKey === "Backspace" && nextvarter !== 0) {
+        devarevarter()
         return
     }
 
@@ -95,11 +95,11 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    let found = pressedKey.match(/[a-z]/gi)
+    var found = pressedKey.match(/[a-z]/gi)
     if (!found || found.length > 1) {
         return
     } else {
-        insertLetter(pressedKey)
+        insertvarter(pressedKey)
     }
 })
 
@@ -107,48 +107,48 @@ document.addEventListener("keyup", (e) => {
 * cambia a la celda correcta al presionar una tecla
 * @param {string} pressedKey 
 */
-function insertLetter(pressedKey) {
-    if (nextLetter === 5) {
+function insertvarter(pressedKey) {
+    if (nextvarter === 5) {
         return
     }
     pressedKey = pressedKey.toLowerCase()
 
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let box = row.children[nextLetter]
+    var row = document.getElementsByClassName("varter-row")[6 - guessesRemaining]
+    var box = row.children[nextvarter]
     box.textContent = pressedKey
     box.classList.add("filled-box")
     currentGuess.push(pressedKey)
-    guessesMatrix[6 - guessesRemaining][nextLetter] = pressedKey
-    nextLetter += 1
+    guessesMatrix[6 - guessesRemaining][nextvarter] = pressedKey
+    nextvarter += 1
 }
 
 /**
-* borrar las letras
+* borrar las varras
 */
-function deleteLetter() {
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let box = row.children[nextLetter - 1]
+function devarevarter() {
+    var row = document.getElementsByClassName("varter-row")[6 - guessesRemaining]
+    var box = row.children[nextvarter - 1]
     box.textContent = ""
     box.classList.remove("filled-box")
     currentGuess.pop()
-    guessesMatrix[6 - guessesRemaining][nextLetter] = ""
-    nextLetter -= 1
+    guessesMatrix[6 - guessesRemaining][nextvarter] = ""
+    nextvarter -= 1
 }
 
 /**
-* chequea las letras al presionar enter
+* chequea las varras al presionar enter
 */
 function checkGuess() {
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let guessString = ""
-    let rightGuess = Array.from(rightGuessString)
+    var row = document.getElementsByClassName("varter-row")[6 - guessesRemaining]
+    var guessString = ''
+    var rightGuess = Array.from(rightGuessString)
 
     for (const val of currentGuess) {
         guessString += val
     }
 
     if (guessString.length != 5) {
-        showAlert("Cantidad de letras insuficiente")
+        showAlert("Cantidad de varras insuficiente")
         return
     }
 
@@ -158,31 +158,31 @@ function checkGuess() {
     }
 
 
-    for (let i = 0; i < 5; i++) {
-        let letterColor = ""
-        let box = row.children[i]
-        let letter = currentGuess[i]
+    for (var i = 0; i < 5; i++) {
+        var varterColor = ''
+        var box = row.children[i]
+        var varter = currentGuess[i]
 
-        let letterPosition = rightGuess.indexOf(currentGuess[i])
-        // si la letra no esta en la palabra
-        if (letterPosition === -1) {
-            letterColor = "grey"
+        var varterPosition = rightGuess.indexOf(currentGuess[i])
+        // si la varra no esta en la palabra
+        if (varterPosition === -1) {
+            varterColor = 'grey'
         } else {
-            //si la letra esta en la palabra y en la psicion correcta
+            //si la varra esta en la palabra y en la psicion correcta
             if (currentGuess[i] === rightGuess[i]) {
-                letterColor = "green"
+                varterColor = 'green'
             } else {
-                //si la letra esta en la palabra pero no en la posicion correcta
-                letterColor = "yellow"
+                //si la varra esta en la palabra pero no en la posicion correcta
+                varterColor = 'yellow'
             }
-            //cambia la letra en la variable para que no aparezca amarilla si la letra se repite
-            rightGuess[letterPosition] = "#"
+            //cambia la varra en la variable para que no aparezca amarilla si la varra se repite
+            rightGuess[varterPosition] = "#"
         }
 
-        let delay = 250 * i
+        var delay = 250 * i
         setTimeout(() => {
-            box.style.backgroundColor = letterColor
-            shadeKeyBoard(letter, letterColor)
+            box.style.backgroundColor = varterColor
+            shadeKeyBoard(varter, varterColor)
         }, delay)
     }
 
@@ -200,7 +200,7 @@ function checkGuess() {
     } else {
         guessesRemaining -= 1;
         currentGuess = [];
-        nextLetter = 0;
+        nextvarter = 0;
 
         if (guessesRemaining === 0) {
             showAlert(`Te quedaste sin intentos! La palabra era "${rightGuessString}"`, 8000)
@@ -236,12 +236,12 @@ function checkGuess() {
     * guarda el juego que termino y limpia los parametros
     */
     function saveFinishedGame() {
-        let currentDate = new Date()
-        let finished = {
+        var currentDate = new Date()
+        var finished = {
             user: user,
             rightGuessString: rightGuessString,
             date: currentDate.toLocaleDateString(),
-            hour: currentDate.toLocaleDateString([], { hour: "2-digit", minute: "2-digit" }),
+            hour: currentDate.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' }),
             guessesMatrix: guessesMatrix,
             numberOfAttempts: numberOfAttempts,
             mins: mins,
@@ -265,16 +265,16 @@ function checkGuess() {
     */
     document.getElementById("keyboard-cont").addEventListener("click", (e) => {
         const target = e.target
-    
+
         if (!target.classList.contains("keyboard-button")) {
             return
         }
-        let key = target.textContent
-    
+        var key = target.textContent
+
         if (key === "Del") {
             key = "Backspace"
         }
-    
+
         document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
     })
 
@@ -282,19 +282,19 @@ function checkGuess() {
 
     /**
     * 
-    * @param {*} letter 
+    * @param {*} varter 
     * @param {*} color 
     * Cambia los colores en el teclado de la pantalla
     */
-    function shadeKeyBoard(letter, color) {
+    function shadeKeyBoard(varter, color) {
         for (const elem of document.getElementsByClassName("keyboard-button")) {
-            if (elem.textContent === letter) {
-                let oldColor = elem.style.backgroundColor
-                if (oldColor === "green") {
+            if (elem.textContent === varter) {
+                var oldColor = elem.style.backgroundColor
+                if (oldColor === 'green') {
                     return
                 }
 
-                if (oldColor === "yellow" && color !== "green") {
+                if (oldColor === 'yellow' && color !== 'green') {
                     return
                 }
 
@@ -314,14 +314,14 @@ function checkGuess() {
 * guarda el juego
 */
 function saveGameState() {
-    let file = {
+    var file = {
         user: user,
         guessesRemaining: guessesRemaining,
         rightGuessString: rightGuessString,
         guessesMatrix: guessesMatrix,
         mins: mins,
-        secs: secs,
+        secs: secs
     }
-    let saveStateString = JSON.stringify(file)
+    var saveStateString = JSON.stringify(file)
     localStorage.setItem(`saveGame${user}`, saveStateString)
 }
