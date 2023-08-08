@@ -4,25 +4,30 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link rel="stylesheet" href="/css/reset.css">
-        <link rel="stylesheet" href="/css/styles.css">
-        <link rel="stylesheet" href="/css/wordle.css">
-
-        <script type="module" src="/js/wordle.js"></script>
+        <link rel="stylesheet" href="../css/reset.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/wordle.css">
         <title>Wordle</title>
     </head>
     <body>
         <header>
             <nav class="navbar">
-                <a href="/index.html">Inicio</a>
-                <a href="">Contacto</a>
-                <a href="">Puntajes</a>
-                <a href="https://github.com/FacundoKinderknecht/FacundoKinderknecht_Wordle_Game_LPPA" target="_blank">Codigo en GitHub</a>
+                <a href="../index.html">Inicio</a>
+                <a href="../html/contact.html">Contacto</a>
+                <a href="../html/scores.html">Puntajes</a>
+                <a href="https://github.com/fran2708/wordle" target="_blank">Codigo en GitHub</a>
             </nav>
         </header>
 
         <main>
+            <div class="alert-container" data-alert-container=""></div>
+
+            <!-- <div data-stopwatch class="stopwatch">00:00</div> -->
+            <div class="timer-div">
+                <p id="stopwatch"></p>
+            </div>
+            
+            <p id="data-stopwatch"></p>
             <div id="game-board"></div>
             <div id="board">
                 <div class="letter-row">
@@ -106,6 +111,11 @@
                     <button class="keyboard-button">Enter</button>
                 </div>
             </div>
+
+            <div id="button-div">
+                <input type="button" class="save-button" value="Guardar partida" id="btn-save">
+            </div>
         </main>
+        <script type="module" src="../scripts/wordle.js"></script>
     </body>
 </html>
