@@ -1,12 +1,8 @@
-import { WORDS } from "./palabras.js";//importa las palabras
-
 //si el usuario no esta logeado lo redirecciona a index
 if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-const alertContainer = document.querySelector("[data-alert-container]")
-let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 const NUMBER_OF_GUESSES = 6
 let guessesRemaining = NUMBER_OF_GUESSES
 let currentGuess = []
@@ -93,7 +89,7 @@ window.onload = () => {
         guessesMatrix[6 - guessesRemaining][nextLetter] = pressedKey
         nextLetter += 1
     }
-
+    
     /**
     * borrar las letras
     */
@@ -110,111 +106,80 @@ window.onload = () => {
     /**
     * chequea las letras al presionar enter
     */
-    function checkGuess() {
+    function checkGuess () {
         let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
         let guessString = ''
         let rightGuess = Array.from(rightGuessString)
-
+    
         for (const val of currentGuess) {
             guessString += val
         }
-
+    
         if (guessString.length != 5) {
             showAlert("Cantidad de letras insuficiente")
             return
         }
-
+    
         if (!WORDS.includes(guessString)) {
             showAlert("Esa palabra no esta en la lista")
             return
         }
-
-
+    
+        
         for (let i = 0; i < 5; i++) {
             let letterColor = ''
             let box = row.children[i]
             let letter = currentGuess[i]
-
+            
             let letterPosition = rightGuess.indexOf(currentGuess[i])
-            // si la letra no esta en la palabra
+            // is letter in the correct guess
             if (letterPosition === -1) {
+                //shade box grey
                 letterColor = 'grey'
             } else {
-                //lsi la letra esta en la palabra y en la psicion correcta
+                //letter is in word
+                //if letter index and right guess index are the same
+                //letter is in the right position 
                 if (currentGuess[i] === rightGuess[i]) {
+                    //shade green 
                     letterColor = 'green'
                 } else {
-                    //si la letra esta en la palabra pero no en la posicion correcta
+                    //shade box yellow
                     letterColor = 'yellow'
                 }
-                //cambia la letra en la variable para que no aparezca amarilla si la letra se repite
+                //change that letter in the variable so that other letters in the word and in the wrong position dont get shaded yellow
                 rightGuess[letterPosition] = "#"
             }
-
+    
             let delay = 250 * i
-            setTimeout(() => {
+            setTimeout(()=> {
+                //shade box
                 box.style.backgroundColor = letterColor
                 shadeKeyBoard(letter, letterColor)
             }, delay)
         }
-
+    
         if (guessString === rightGuessString) {
-            showAlert("Felicidades has ganado!!", 4000)
-
+            showAlert("Acertaste la palabra! Podras ver tu puntaje en la tabla de ganadores", 5000)
+            
+            //sets variable to be saved on finishedGames
+            numberOfAttempts = 6 - (guessesRemaining - 1)
+            saveFinishedGame()
+            stopTimer()
+    
             guessesRemaining = 0
-
+    
             return
         } else {
             guessesRemaining -= 1;
             currentGuess = [];
             nextLetter = 0;
-
+    
             if (guessesRemaining === 0) {
                 showAlert(`Te quedaste sin intentos! La palabra era "${rightGuessString}"`, 8000)
-            }
-        }
-    }
-
-    /**
-     * 
-     * @param {string} message 
-     * @param {int} duration 
-     * @returns an alert message on screen
-     */
-    function showAlert(message, duration = 500) {
-        const alert = document.createElement("div");
-        alert.textContent = message;
-        alert.classList.add("alert");
-        alertContainer.prepend(alert);
-        if (!duration) return;
-        setTimeout(() => {
-            alert.classList.add("hide");
-            alert.addEventListener("transitionend", () => {
-                alert.remove();
-            });
-        }, duration);
-    }
-
-    /**
-    * 
-    * @param {*} letter 
-    * @param {*} color 
-    * Cambia los colores en el teclado de la pantalla
-    */
-    function shadeKeyBoard(letter, color) {
-        for (const elem of document.getElementsByClassName("keyboard-button")) {
-            if (elem.textContent === letter) {
-                let oldColor = elem.style.backgroundColor
-                if (oldColor === 'green') {
-                    return
+                if  (localStorage.getItem(`saveGame${user}`) !== null) {
+                    localStorage.removeItem(`saveGame${user}`)
                 }
-
-                if (oldColor === 'yellow' && color !== 'green') {
-                    return
-                }
-
-                elem.style.backgroundColor = color
-                break
             }
         }
     }

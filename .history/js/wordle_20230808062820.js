@@ -159,7 +159,7 @@ window.onload = () => {
         }
 
         if (guessString === rightGuessString) {
-            showAlert("Felicidades has ganado!!", 4000)
+            showAlert("Acertaste la palabra! Podras ver tu puntaje en la tabla de ganadores", 5000)
 
             guessesRemaining = 0
 
@@ -181,7 +181,7 @@ window.onload = () => {
      * @param {int} duration 
      * @returns an alert message on screen
      */
-    function showAlert(message, duration = 500) {
+    function showAlert(message, duration = 1000) {
         const alert = document.createElement("div");
         alert.textContent = message;
         alert.classList.add("alert");
@@ -196,28 +196,28 @@ window.onload = () => {
     }
 
     /**
-    * 
-    * @param {*} letter 
-    * @param {*} color 
-    * Cambia los colores en el teclado de la pantalla
-    */
-    function shadeKeyBoard(letter, color) {
-        for (const elem of document.getElementsByClassName("keyboard-button")) {
-            if (elem.textContent === letter) {
-                let oldColor = elem.style.backgroundColor
-                if (oldColor === 'green') {
-                    return
-                }
-
-                if (oldColor === 'yellow' && color !== 'green') {
-                    return
-                }
-
-                elem.style.backgroundColor = color
-                break
+ * 
+ * @param {*} letter 
+ * @param {*} color 
+ * colors the on screen keyboard
+ */
+function shadeKeyBoard(letter, color) {
+    for (const elem of document.getElementsByClassName("keyboard-button")) {
+        if (elem.textContent === letter) {
+            let oldColor = elem.style.backgroundColor
+            if (oldColor === 'green') {
+                return
             }
+
+            if (oldColor === 'yellow' && color !== 'green') {
+                return
+            }
+
+            elem.style.backgroundColor = color
+            break
         }
     }
+}
 
 
 }

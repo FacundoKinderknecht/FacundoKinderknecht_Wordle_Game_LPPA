@@ -159,7 +159,7 @@ window.onload = () => {
         }
 
         if (guessString === rightGuessString) {
-            showAlert("Felicidades has ganado!!", 4000)
+            showAlert("Acertaste la palabra! Podras ver tu puntaje en la tabla de ganadores", 5000)
 
             guessesRemaining = 0
 
