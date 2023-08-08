@@ -3,21 +3,16 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-var elemStopwatch = document.getElementById("stopwatch")
-var stopwatch
-var mins
-var secs
 
 
 window.onload = () =>{
     startTimer(0,0)
     
 /**
- * inicia el timer
- * @param {int} m minutos
- * @param {int} s segundos
+ * sets and starts the timer
+ * @param {int} m minutes
+ * @param {int} s seconds
  */
-
 function startTimer(m,s){
     stopwatch = setInterval(function(){
         if (s >= 60) {
@@ -31,4 +26,8 @@ function startTimer(m,s){
     },1000)
 }
 
+//stops the timer
+function stopTimer() {
+    clearInterval(stopwatch)
+}
 }

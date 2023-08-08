@@ -3,7 +3,9 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-var elemStopwatch = document.getElementById("stopwatch")
+var stopwatch
+var mins
+var secs
 var stopwatch
 var mins
 var secs

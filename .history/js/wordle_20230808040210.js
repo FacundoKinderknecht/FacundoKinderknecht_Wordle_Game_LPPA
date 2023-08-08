@@ -3,10 +3,6 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-var elemStopwatch = document.getElementById("stopwatch")
-var stopwatch
-var mins
-var secs
 
 
 window.onload = () =>{
@@ -31,4 +27,8 @@ function startTimer(m,s){
     },1000)
 }
 
+//stops the timer
+function stopTimer() {
+    clearInterval(stopwatch)
+}
 }
