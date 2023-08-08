@@ -45,7 +45,7 @@ window.onload = () => {
 
     /**
      * 
-     * listenevent para el teclado
+     * listener event for key press
      */
     document.addEventListener("keyup", (e) => {
         if (guessesRemaining === 0) {
@@ -72,7 +72,7 @@ window.onload = () => {
     })
 
     /**
-    * cambia a la celda correcta al presionar una tecla
+    * inserts letter on correct cell after key press
     * @param {string} pressedKey 
     */
     function insertLetter(pressedKey) {
@@ -89,10 +89,10 @@ window.onload = () => {
         guessesMatrix[6 - guessesRemaining][nextLetter] = pressedKey
         nextLetter += 1
     }
-    
+
     /**
-    * borrar las letras
-    */
+ * deletes letter after back space is pressed
+ */
     function deleteLetter() {
         let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
         let box = row.children[nextLetter - 1]

@@ -45,7 +45,7 @@ window.onload = () => {
 
     /**
      * 
-     * listenevent para el teclado
+     * listenevent para las teclas del teclado
      */
     document.addEventListener("keyup", (e) => {
         if (guessesRemaining === 0) {
@@ -91,7 +91,7 @@ window.onload = () => {
     }
     
     /**
-    * borrar las letras
+    * deletes letter after back space is pressed
     */
     function deleteLetter() {
         let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]

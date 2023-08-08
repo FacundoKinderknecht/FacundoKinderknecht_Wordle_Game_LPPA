@@ -5,7 +5,6 @@ if (sessionStorage.user == null) {
 
 const NUMBER_OF_GUESSES = 6
 let guessesRemaining = NUMBER_OF_GUESSES
-let currentGuess = []
 let nextLetter = 0
 let guessesMatrix = [
     ["", "", "", "", ""],
@@ -45,7 +44,7 @@ window.onload = () => {
 
     /**
      * 
-     * listenevent para el teclado
+     * listener event for key press
      */
     document.addEventListener("keyup", (e) => {
         if (guessesRemaining === 0) {
@@ -70,9 +69,9 @@ window.onload = () => {
             insertLetter(pressedKey)
         }
     })
-
+    
     /**
-    * cambia a la celda correcta al presionar una tecla
+    * inserts letter on correct cell after key press
     * @param {string} pressedKey 
     */
     function insertLetter(pressedKey) {
@@ -89,19 +88,6 @@ window.onload = () => {
         guessesMatrix[6 - guessesRemaining][nextLetter] = pressedKey
         nextLetter += 1
     }
+
     
-    /**
-    * borrar las letras
-    */
-    function deleteLetter() {
-        let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-        let box = row.children[nextLetter - 1]
-        box.textContent = ""
-        box.classList.remove("filled-box")
-        currentGuess.pop()
-        guessesMatrix[6 - guessesRemaining][nextLetter] = ""
-        nextLetter -= 1
-    }
-
-
 }
