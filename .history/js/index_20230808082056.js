@@ -1,17 +1,14 @@
-function getElements() {
+function getElements(){
     user = document.getElementById("txt-user")
     btnNew = document.getElementById("btn-new")
     btnLoad = document.getElementById("btn-load")
-    lblErrorNew = document.getElementById("error-new")
-    lblErrorLoad = document.getElementById("error-load")
 }
 
 window.onload = () => {
     getElements()
     hideLabels()
 
-
-    //cuando presiono el boton nuevo juego chequeo las partidas guardas y logueo el usuario
+    //when "new" button is clicked, check for saved games with that name, and set user in sessionStorage
     btnNew.onclick = (e) => {
         hideLabels()
         let currentUser = user.value
@@ -19,16 +16,16 @@ window.onload = () => {
             if (localStorage.getItem(`saveGame${currentUser}`) === null) {
                 sessionStorage.setItem("user", user.value)
                 sessionStorage.setItem("isNew", true)
-                location.href = '/html/wordle.html'
+                location.href = 'html/game.html'
             } else {
-                lblErrorNew.classList.toggle("hidden", false)
+                lblErrorNew.classList.toggle("hidden",false)
             }
         } else {
-            lblErrorEmpty.classList.toggle("hidden", false)
+            lblErrorEmpty.classList.toggle("hidden",false)
         }
     }
 
-    //cuando presiono el boton cargar partida chequeo las partidas guardas cargo una y logueo el usuario
+    //when "load" button is clicked, check for saved games and set user
     btnLoad.onclick = (e) => {
         hideLabels()
         let currentUser = user.value
@@ -36,17 +33,17 @@ window.onload = () => {
             if ((`saveGame${currentUser}` in localStorage)) {
                 sessionStorage.setItem("user", user.value)
                 sessionStorage.setItem("isNew", "false")
-                location.href = '/html/wordle.html'
+                location.href = 'html/game.html'
             } else {
-                lblErrorLoad.classList.toggle("hidden", false)
+                lblErrorLoad.classList.toggle("hidden",false)
             }
         } else {
-            lblErrorEmpty.classList.toggle("hidden", false)
+            lblErrorEmpty.classList.toggle("hidden",false)
         }
     }
+}
 
-
-    function hideLabels() {
+    function hideLabels () {
         user.onfocus = () => {
             lblErrorEmpty.classList.toggle("hidden", true)
         }

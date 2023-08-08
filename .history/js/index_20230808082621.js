@@ -36,7 +36,7 @@ window.onload = () => {
             if ((`saveGame${currentUser}` in localStorage)) {
                 sessionStorage.setItem("user", user.value)
                 sessionStorage.setItem("isNew", "false")
-                location.href = '/html/wordle.html'
+                location.href = 'html/wordle.html'
             } else {
                 lblErrorLoad.classList.toggle("hidden", false)
             }
