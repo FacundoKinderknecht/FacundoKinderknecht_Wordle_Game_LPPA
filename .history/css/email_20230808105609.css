@@ -1,5 +1,5 @@
 form{
-    background-color: #f8f8ffdf;
+    background-color: rgba(248, 248, 255, 0.874);
     margin: 100px auto;
     width: 90%;
     max-width: 400px;
@@ -32,12 +32,12 @@ form{
     width: 100%;
     background: none;
     margin-bottom: 8px;
-    color: #1b1b1b;
+    color: rgb(27, 27, 27);
     font-size: 16px;
     padding: 5px 3px;
     border:none;
     outline:none;
-    border-bottom: 1px solid #5757577d;
+    border-bottom: 1px solid rgb(87, 87, 87, 0.49);
 }
 
 .form-txt:focus + .form-lbl, .form-txt:not(:placeholder-shown) + .form-lbl{
@@ -58,7 +58,7 @@ form{
 
 .form-txt-error{
     width: 100%;
-    color:#ff0000;
+    color:rgb(255, 0, 0);
     text-align: center;
 }
 
