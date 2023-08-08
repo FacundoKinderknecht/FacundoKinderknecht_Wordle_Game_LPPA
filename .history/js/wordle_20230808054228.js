@@ -3,9 +3,6 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-const NUMBER_OF_GUESSES = 6
-let guessesRemaining = NUMBER_OF_GUESSES
-let nextLetter = 0
 var elemStopwatch = document.getElementById("stopwatch")
 var stopwatch
 var mins
@@ -61,5 +58,37 @@ window.onload = () => {
             insertLetter(pressedKey)
         }
     })
-    
+
+    /**
+    * inserts letter on correct cell after key press
+    * @param {string} pressedKey 
+    */
+    function insertLetter(pressedKey) {
+        if (nextLetter === 5) {
+            return
+        }
+        pressedKey = pressedKey.toLowerCase()
+
+        let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+        let box = row.children[nextLetter]
+        box.textContent = pressedKey
+        box.classList.add("filled-box")
+        currentGuess.push(pressedKey)
+        guessesMatrix[6 - guessesRemaining][nextLetter] = pressedKey
+        nextLetter += 1
+    }
+
+    /**
+    * deletes letter after back space is pressed
+    */
+    function deleteLetter() {
+        let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+        let box = row.children[nextLetter - 1]
+        box.textContent = ""
+        box.classList.remove("filled-box")
+        currentGuess.pop()
+        guessesMatrix[6 - guessesRemaining][nextLetter] = ""
+        nextLetter -= 1
+    }
+
 }

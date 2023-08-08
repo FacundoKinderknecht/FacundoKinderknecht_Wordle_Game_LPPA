@@ -3,9 +3,6 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-const NUMBER_OF_GUESSES = 6
-let guessesRemaining = NUMBER_OF_GUESSES
-let nextLetter = 0
 var elemStopwatch = document.getElementById("stopwatch")
 var stopwatch
 var mins
@@ -61,5 +58,7 @@ window.onload = () => {
             insertLetter(pressedKey)
         }
     })
-    
+
+
+
 }
