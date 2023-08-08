@@ -140,7 +140,7 @@ window.onload = () => {
             if (letterPosition === -1) {
                 letterColor = 'grey'
             } else {
-                //si la letra esta en la palabra y en la psicion correcta
+                //lsi la letra esta en la palabra y en la psicion correcta
                 if (currentGuess[i] === rightGuess[i]) {
                     letterColor = 'green'
                 } else {
@@ -197,26 +197,6 @@ window.onload = () => {
         }, duration);
     }
 
-    /** 
-    * funcion para el teclado de pantalla
-    */
-    document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-        const target = e.target
-
-        if (!target.classList.contains("keyboard-button")) {
-            return
-        }
-        let key = target.textContent
-
-        if (key === "Del") {
-            key = "Backspace"
-        }
-
-        document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
-    })
-
-
-
     /**
     * 
     * @param {*} letter 
@@ -243,8 +223,8 @@ window.onload = () => {
 
     //para el cronometro
     function stopTimer() {
-        clearInterval(stopwatch)
-    }
+    clearInterval(stopwatch)
+}
 
 
 }
