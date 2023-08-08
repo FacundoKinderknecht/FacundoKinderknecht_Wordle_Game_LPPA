@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/index.css">
+        <script src="/js/index.js"></script>
+        
+        <title>Final LPPA Facundo Kinderknecht</title>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <a href="">Inicio</a>
+                <a href="">Contacto</a>
+                <a href="">Puntajes</a>
+                <a href="" target="_blank">Codigo en GitHub</a>
+            </nav>
+        </header>
+
+        <div class="form-container">
+            <form class="form-user">
+                <h2 class="form-title">Ingrese un usuario para jugar</h2>
+                <fieldset class="group-form">
+                    <input class="form-txt" id="txt-user" placeholder="">
+                    <label class="form-lbl" id="lbl-user" for="txt-user">Nombre de usuario</label>
+                </fieldset>
+                <input type="button" class="form-button" value="Nueva partida" id="btn-new">
+                <input type="button" class="form-button" value="Cargar partida" id="btn-load">
+                <label class="form-txt-error hidden" id="error-empty">Debe ingresar un nombre</label>
+            </form>
+        </div>
+    </body>
+</html>
