@@ -15,7 +15,7 @@ window.onload = () => {
         if (!currentUser) {
             lblErrorEmpty.classList.toggle("hidden", false)
         }else{
-            location.href = '/html/wordle.html'
+            location.href = '/html/game.html'
         }
     }
 

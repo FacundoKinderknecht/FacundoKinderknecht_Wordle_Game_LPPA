@@ -6,16 +6,22 @@ function getElements(){
 
 window.onload = () => {
     getElements()
-    hideLabels()
+    hidelables()
 
     //when "new" button is clicked, check for saved games with that name, and set user in sessionS
     btnNew.onclick = (e) => {
         hideLabels()
         let currentUser = user.value
-        if (!currentUser) {
-            lblErrorEmpty.classList.toggle("hidden", false)
-        }else{
-            location.href = '/html/wordle.html'
+        if (currentUser) {
+            if (localStorage.getItem(`saveGame${currentUser}`) === null) {
+                sessionStorage.setItem("user", user.value)
+                sessionStorage.setItem("isNew", true)
+                location.href = '/html/wordle.html'
+            } else {
+                lblErrorNew.classList.toggle("hidden",false)
+            }
+        } else {
+            lblErrorEmpty.classList.toggle("hidden",false)
         }
     }
 

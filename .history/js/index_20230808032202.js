@@ -12,10 +12,14 @@ window.onload = () => {
     btnNew.onclick = (e) => {
         hideLabels()
         let currentUser = user.value
-        if (!currentUser) {
-            lblErrorEmpty.classList.toggle("hidden", false)
-        }else{
-            location.href = '/html/wordle.html'
+        if (currentUser) {
+            if (localStorage.getItem(`saveGame${currentUser}`) === null) {
+                sessionStorage.setItem("user", user.value)
+                sessionStorage.setItem("isNew", true)
+                location.href = '/html/wordle.html'
+            }
+        } else {
+            lblErrorEmpty.classList.toggle("hidden",false)
         }
     }
 

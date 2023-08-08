@@ -13,9 +13,9 @@ window.onload = () => {
         hideLabels()
         let currentUser = user.value
         if (!currentUser) {
-            lblErrorEmpty.classList.toggle("hidden", false)
-        }else{
-            location.href = '/html/wordle.html'
+            if (lblErrorEmpty.classList.toggle("hidden",false)) {
+                
+            }
         }
     }
 
