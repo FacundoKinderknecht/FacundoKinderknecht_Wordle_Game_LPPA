@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/reset.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/contact.css">
+        <script src="../scripts/contact.js"></script>
+        <title>Contacto</title>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <a href="../index.html">Inicio</a>
+                <a href="../html/email.html">Contacto</a>
+                <a href="../html/puntajes.html">Puntajes</a>
+                <a href="https://github.com/FacundoKinderknecht/FacundoKinderknecht_Wordle_Game_LPPA" target="_blank">Codigo en GitHub</a>
+            </nav>
+        </header>
+
+        <main>
+            <form id="form-email">
+                <h2 class="form-title">
+                    Envianos un mail con tus comentarios
+                </h2>
+                <fieldset class="group-form">
+                    <input class="form-txt" id="txt-name" placeholder=" ">
+                    <label class="form-lbl" id="lbl-name" for="txt-name">Nombre</label>
+                    <label class="form-txt-error hidden" id="error-name" for="txt-name">Nombre invalido</label>
+                </fieldset>
+                <fieldset class="group-form">
+                    <input class="form-txt" id="txt-email" placeholder=" ">
+                    <label class="form-lbl" id="lbl-email" for="txt-email">Email</label>
+                    <label class="form-txt-error hidden" id="error-email" for="txt-email">Email inválido</label>
+                </fieldset>
+                <fieldset class="group-form">
+                    <textarea class="form-txt" id="txt-message" placeholder=" "></textarea>
+                    <label class="form-lbl" id="lbl-message" for="txt-message">Mensaje</label>
+                    <label class="form-txt-error hidden" id="error-message" for="txt-message">El mensaje es demasiado corto</label>
+                </fieldset>
+                <input type="submit" class="form-button" value="Enviar mensaje" id="btn-submit">
+                <label class="form-txt-error hidden" id="error-login">Todos los campos deben estar completados</label>
+            </form>
+        </main>
+    </body>
+</html>

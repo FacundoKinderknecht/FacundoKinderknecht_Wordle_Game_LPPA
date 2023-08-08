@@ -1,5 +1,4 @@
 function getElements() {
-    lblLoading = document.getElementById("loading-text")
     title = document.getElementById("title")
     if (localStorage.finishedGames == null) {
         finishedGames = null
@@ -18,7 +17,7 @@ window.onload = () => {
 function fillTable() {
     if (finishedGames == null) {
         title.classList.toggle("hidden",false)
-        title.innerHTML = "Aun no se han registrado partidas jugadas"
+        title.innerHTML = "Aun no se han registrado partidas"
     } else {
     lblLoading.classList.toggle("hidden",true)
     title.classList.toggle("hidden",true)
