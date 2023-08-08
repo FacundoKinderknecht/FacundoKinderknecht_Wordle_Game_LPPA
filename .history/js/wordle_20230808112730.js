@@ -10,7 +10,6 @@ const alertContainer = document.querySelector("[data-alert-container]")
 let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 const NUMBER_OF_GUESSES = 6
 let guessesRemaining = NUMBER_OF_GUESSES
-let numberOfAttempts
 let currentGuess = []
 let nextLetter = 0
 let guessesMatrix = [
@@ -95,7 +94,7 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    let found = pressedKey.match(/[a-z]/gi)
+    let found = pressedKey.match(/[a-z,ñ]/gi)
     if (!found || found.length > 1) {
         return
     } else {
@@ -189,8 +188,6 @@ function checkGuess() {
     if (guessString === rightGuessString) {
         showAlert("Felicidades has ganado!!", 4000)
 
-        numberOfAttempts = 6 - (guessesRemaining - 1)
-
         saveFinishedGame()
         stopTimer()
 
@@ -243,7 +240,6 @@ function checkGuess() {
             date: currentDate.toLocaleDateString(),
             hour: currentDate.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' }),
             guessesMatrix: guessesMatrix,
-            numberOfAttempts: numberOfAttempts,
             mins: mins,
             secs: secs
         }

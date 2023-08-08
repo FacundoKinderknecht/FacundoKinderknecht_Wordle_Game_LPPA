@@ -10,7 +10,7 @@ const alertContainer = document.querySelector("[data-alert-container]")
 let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 const NUMBER_OF_GUESSES = 6
 let guessesRemaining = NUMBER_OF_GUESSES
-let numberOfAttempts
+
 let currentGuess = []
 let nextLetter = 0
 let guessesMatrix = [
@@ -189,8 +189,6 @@ function checkGuess() {
     if (guessString === rightGuessString) {
         showAlert("Felicidades has ganado!!", 4000)
 
-        numberOfAttempts = 6 - (guessesRemaining - 1)
-
         saveFinishedGame()
         stopTimer()
 
@@ -243,7 +241,7 @@ function checkGuess() {
             date: currentDate.toLocaleDateString(),
             hour: currentDate.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' }),
             guessesMatrix: guessesMatrix,
-            numberOfAttempts: numberOfAttempts,
+            numberOfAttempts: guessesRemaining - 6,
             mins: mins,
             secs: secs
         }

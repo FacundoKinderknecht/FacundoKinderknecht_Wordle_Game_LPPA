@@ -243,7 +243,7 @@ function checkGuess() {
             date: currentDate.toLocaleDateString(),
             hour: currentDate.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' }),
             guessesMatrix: guessesMatrix,
-            numberOfAttempts: numberOfAttempts,
+            numberOfAttempts: guessesRemaining,
             mins: mins,
             secs: secs
         }
