@@ -50,7 +50,7 @@ window.onload = () => {
     console.log(rightGuessString)
 
     var btnSave = document.getElementById("btn-save")
-    btnSave.onclick = (e) => {
+    btnSave.onclick =  (e) => {
         saveGameState()
         sessionStorage.isNew = "false"
     }
@@ -96,7 +96,7 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    let found = pressedKey.match(/[a-z,ñ]/gi)
+    let found = pressedKey.match(/[a-z]/gi)
     if (!found || found.length > 1) {
         return
     } else {
@@ -248,7 +248,7 @@ function checkGuess() {
             mins: mins,
             secs: secs
         }
-        if (localStorage.finishedGames === null) {
+        if (localStorage.finishedGames == null) {
             var finishedGames = []
         } else {
             var finishedGames = JSON.parse(localStorage.finishedGames)
@@ -259,6 +259,27 @@ function checkGuess() {
 
         localStorage.removeItem(`saveGame${user}`)
     }
+
+
+    /** 
+    * funcion para el teclado de pantalla
+    */
+    document.getElementById("keyboard-cont").addEventListener("click", (e) => {
+        const target = e.target
+    
+        if (!target.classList.contains("keyboard-button")) {
+            return
+        }
+        let key = target.textContent
+    
+        if (key === "Del") {
+            key = "Backspace"
+        }
+    
+        document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
+    })
+
+
 
     /**
     * 
@@ -289,24 +310,6 @@ function checkGuess() {
         clearInterval(stopwatch)
     }
 }
-
-/** 
-* funcion para el teclado de pantalla
-*/
-document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-    const target = e.target
-
-    if (!target.classList.contains("keyboard-button")) {
-        return
-    }
-    let key = target.textContent
-
-    if (key === "Del") {
-        key = "Backspace"
-    }
-
-    document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
-})
 
 /**
 * guarda el juego

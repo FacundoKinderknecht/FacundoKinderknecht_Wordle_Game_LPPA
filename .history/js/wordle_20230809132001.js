@@ -1,3 +1,5 @@
+'use strict';
+
 import { WORDS } from "./palabras.js";//importa las palabras
 
 //si el usuario no esta logeado lo redirecciona a index
@@ -5,10 +7,6 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-var elemStopwatch = document.getElementById("stopwatch")
-var stopwatch
-var mins
-var secs
 let user = sessionStorage.user
 const alertContainer = document.querySelector("[data-alert-container]")
 let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
@@ -25,7 +23,10 @@ let guessesMatrix = [
     ["", "", "", "", ""],
     ["", "", "", "", ""]
 ]
-
+var elemStopwatch = document.getElementById("stopwatch")
+var stopwatch
+var mins
+var secs
 
 
 window.onload = () => {
@@ -50,7 +51,7 @@ window.onload = () => {
     console.log(rightGuessString)
 
     var btnSave = document.getElementById("btn-save")
-    btnSave.onclick = (e) => {
+    btnSave.onclick =  (e) => {
         saveGameState()
         sessionStorage.isNew = "false"
     }
@@ -96,7 +97,7 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    let found = pressedKey.match(/[a-z,ñ]/gi)
+    let found = pressedKey.match(/[a-z]/gi)
     if (!found || found.length > 1) {
         return
     } else {
@@ -148,7 +149,7 @@ function checkGuess() {
         guessString += val
     }
 
-    if (guessString.length !== 5) {
+    if (guessString.length != 5) {
         showAlert("Cantidad de letras insuficiente")
         return
     }
@@ -248,7 +249,7 @@ function checkGuess() {
             mins: mins,
             secs: secs
         }
-        if (localStorage.finishedGames === null) {
+        if (localStorage.finishedGames == null) {
             var finishedGames = []
         } else {
             var finishedGames = JSON.parse(localStorage.finishedGames)
@@ -259,6 +260,27 @@ function checkGuess() {
 
         localStorage.removeItem(`saveGame${user}`)
     }
+
+
+    /** 
+    * funcion para el teclado de pantalla
+    */
+    document.getElementById("keyboard-cont").addEventListener("click", (e) => {
+        const target = e.target
+    
+        if (!target.classList.contains("keyboard-button")) {
+            return
+        }
+        let key = target.textContent
+    
+        if (key === "Del") {
+            key = "Backspace"
+        }
+    
+        document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
+    })
+
+
 
     /**
     * 
@@ -289,24 +311,6 @@ function checkGuess() {
         clearInterval(stopwatch)
     }
 }
-
-/** 
-* funcion para el teclado de pantalla
-*/
-document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-    const target = e.target
-
-    if (!target.classList.contains("keyboard-button")) {
-        return
-    }
-    let key = target.textContent
-
-    if (key === "Del") {
-        key = "Backspace"
-    }
-
-    document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
-})
 
 /**
 * guarda el juego

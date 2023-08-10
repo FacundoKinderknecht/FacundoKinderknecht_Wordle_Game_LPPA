@@ -5,19 +5,15 @@ if (sessionStorage.user == null) {
     location.href = "/index.html"
 }
 
-var elemStopwatch = document.getElementById("stopwatch")
-var stopwatch
-var mins
-var secs
-let user = sessionStorage.user
+var user = sessionStorage.user
 const alertContainer = document.querySelector("[data-alert-container]")
-let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
+var rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 const NUMBER_OF_GUESSES = 6
-let guessesRemaining = NUMBER_OF_GUESSES
-let numberOfAttempts
-let currentGuess = []
-let nextLetter = 0
-let guessesMatrix = [
+var guessesRemaining = NUMBER_OF_GUESSES
+var numberOfAttempts
+var currentGuess = []
+var nextLetter = 0
+var guessesMatrix = [
     ["", "", "", "", ""],
     ["", "", "", "", ""],
     ["", "", "", "", ""],
@@ -25,7 +21,10 @@ let guessesMatrix = [
     ["", "", "", "", ""],
     ["", "", "", "", ""]
 ]
-
+var elemStopwatch = document.getElementById("stopwatch")
+var stopwatch
+var mins
+var secs
 
 
 window.onload = () => {
@@ -33,15 +32,15 @@ window.onload = () => {
 
     if (sessionStorage.getItem("isNew") === "false") {
         var loadFile = JSON.parse(localStorage.getItem(`saveGame${user}`))
-        let savedGuessesRemaining = loadFile.guessesRemaining
+        var savedGuessesRemaining = loadFile.guessesRemaining
         rightGuessString = loadFile.rightGuessString
         guessesMatrix = loadFile.guessesMatrix
         mins = loadFile.mins
         secs = loadFile.secs
         startTimer(mins, secs)
 
-        for (let row = 0; row < 6 - savedGuessesRemaining; row++) {
-            for (let box = 0; box < 5; box++) {
+        for (var row = 0; row < 6 - savedGuessesRemaining; row++) {
+            for (var box = 0; box < 5; box++) {
                 insertLetter(guessesMatrix[row][box])
             }
             checkGuess()
@@ -85,7 +84,7 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    let pressedKey = String(e.key)
+    var pressedKey = String(e.key)
     if (pressedKey === "Backspace" && nextLetter !== 0) {
         deleteLetter()
         return
@@ -96,7 +95,7 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    let found = pressedKey.match(/[a-z,ñ]/gi)
+    var found = pressedKey.match(/[a-z]/gi)
     if (!found || found.length > 1) {
         return
     } else {
@@ -114,8 +113,8 @@ function insertLetter(pressedKey) {
     }
     pressedKey = pressedKey.toLowerCase()
 
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let box = row.children[nextLetter]
+    var row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    var box = row.children[nextLetter]
     box.textContent = pressedKey
     box.classList.add("filled-box")
     currentGuess.push(pressedKey)
@@ -127,8 +126,8 @@ function insertLetter(pressedKey) {
 * borrar las letras
 */
 function deleteLetter() {
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let box = row.children[nextLetter - 1]
+    var row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    var box = row.children[nextLetter - 1]
     box.textContent = ""
     box.classList.remove("filled-box")
     currentGuess.pop()
@@ -140,15 +139,15 @@ function deleteLetter() {
 * chequea las letras al presionar enter
 */
 function checkGuess() {
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let guessString = ""
-    let rightGuess = Array.from(rightGuessString)
+    var row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    var guessString = ""
+    var rightGuess = Array.from(rightGuessString)
 
     for (const val of currentGuess) {
         guessString += val
     }
 
-    if (guessString.length !== 5) {
+    if (guessString.length != 5) {
         showAlert("Cantidad de letras insuficiente")
         return
     }
@@ -159,12 +158,12 @@ function checkGuess() {
     }
 
 
-    for (let i = 0; i < 5; i++) {
-        let letterColor = ""
-        let box = row.children[i]
-        let letter = currentGuess[i]
+    for (var i = 0; i < 5; i++) {
+        var letterColor = ""
+        var box = row.children[i]
+        var letter = currentGuess[i]
 
-        let letterPosition = rightGuess.indexOf(currentGuess[i])
+        var letterPosition = rightGuess.indexOf(currentGuess[i])
         // si la letra no esta en la palabra
         if (letterPosition === -1) {
             letterColor = "grey"
@@ -180,7 +179,7 @@ function checkGuess() {
             rightGuess[letterPosition] = "#"
         }
 
-        let delay = 250 * i
+        var delay = 250 * i
         setTimeout(() => {
             box.style.backgroundColor = letterColor
             shadeKeyBoard(letter, letterColor)
@@ -237,8 +236,8 @@ function checkGuess() {
     * guarda el juego que termino y limpia los parametros
     */
     function saveFinishedGame() {
-        let currentDate = new Date()
-        let finished = {
+        var currentDate = new Date()
+        var finished = {
             user: user,
             rightGuessString: rightGuessString,
             date: currentDate.toLocaleDateString(),
@@ -248,7 +247,7 @@ function checkGuess() {
             mins: mins,
             secs: secs
         }
-        if (localStorage.finishedGames === null) {
+        if (localStorage.finishedGames == null) {
             var finishedGames = []
         } else {
             var finishedGames = JSON.parse(localStorage.finishedGames)
@@ -260,6 +259,27 @@ function checkGuess() {
         localStorage.removeItem(`saveGame${user}`)
     }
 
+
+    /** 
+    * funcion para el teclado de pantalla
+    */
+    document.getElementById("keyboard-cont").addEventListener("click", (e) => {
+        const target = e.target
+    
+        if (!target.classList.contains("keyboard-button")) {
+            return
+        }
+        var key = target.textContent
+    
+        if (key === "Del") {
+            key = "Backspace"
+        }
+    
+        document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
+    })
+
+
+
     /**
     * 
     * @param {*} letter 
@@ -269,7 +289,7 @@ function checkGuess() {
     function shadeKeyBoard(letter, color) {
         for (const elem of document.getElementsByClassName("keyboard-button")) {
             if (elem.textContent === letter) {
-                let oldColor = elem.style.backgroundColor
+                var oldColor = elem.style.backgroundColor
                 if (oldColor === "green") {
                     return
                 }
@@ -290,29 +310,11 @@ function checkGuess() {
     }
 }
 
-/** 
-* funcion para el teclado de pantalla
-*/
-document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-    const target = e.target
-
-    if (!target.classList.contains("keyboard-button")) {
-        return
-    }
-    let key = target.textContent
-
-    if (key === "Del") {
-        key = "Backspace"
-    }
-
-    document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
-})
-
 /**
 * guarda el juego
 */
 function saveGameState() {
-    let file = {
+    var file = {
         user: user,
         guessesRemaining: guessesRemaining,
         rightGuessString: rightGuessString,
@@ -320,6 +322,6 @@ function saveGameState() {
         mins: mins,
         secs: secs,
     }
-    let saveStateString = JSON.stringify(file)
+    var saveStateString = JSON.stringify(file)
     localStorage.setItem(`saveGame${user}`, saveStateString)
 }
